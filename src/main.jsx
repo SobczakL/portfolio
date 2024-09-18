@@ -4,11 +4,14 @@ import App from "./App.jsx";
 import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import overrides from "./styles/theme/index.js";
+import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
 		<ChakraProvider theme={overrides}>
-			<App />
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
 		</ChakraProvider>
 	</StrictMode>,
 );
