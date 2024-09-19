@@ -1,8 +1,8 @@
-export function asciiGen(url, elementId, asciiArtElement) {
+export function asciiGen(url, parentId, elementId, asciiArtElement) {
+	const parentSize = parentId.offsetWidth;
+	console.log(parentSize);
 	const density =
 		"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,^`'. ";
-	const targetWidth = 200;
-	const targetHeight = 120;
 	const ctx = elementId.getContext("2d");
 
 	if (isImage(url)) {
@@ -39,9 +39,9 @@ export function asciiGen(url, elementId, asciiArtElement) {
 
 	async function handleVideo(videoUrl) {
 		const video = document.createElement("video");
-        console.log(video)
+
 		video.src = videoUrl;
-        video.muted = true
+		video.muted = true;
 		video.crossOrigin = "Anonymous";
 		video.currentTime = 0;
 		video.onerror = () => {
@@ -56,13 +56,14 @@ export function asciiGen(url, elementId, asciiArtElement) {
 			const width = targetWidth;
 			const height = Math.round(width / aspectRatio);
 
-			elementId.width = width;
+			elementId.width = parentSize;
 			elementId.height = height;
 			ctx.drawImage(video, 0, 0, width, height);
 			generateASCII();
 		});
 	}
 
+	/* Generate ascii: calc avg brightness of pixel and map to density var to pixel position */
 	function generateASCII() {
 		const width = elementId.width;
 		const height = elementId.height;

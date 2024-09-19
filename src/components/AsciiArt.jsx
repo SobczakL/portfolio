@@ -6,6 +6,7 @@ import { Box } from "@chakra-ui/react";
 export default function AsciiArt() {
 	const canvasRef = useRef(null);
 	const asciiArtRef = useRef(null);
+    const parentRef = useRef(null)
 	const [fontSize, setFontSize] = useState(14);
 
 	const calculateFontSize = () => {
@@ -26,7 +27,7 @@ export default function AsciiArt() {
 		window.addEventListener("resize", calculateFontSize);
 
 		const mediaURL = videoMedia;
-		asciiGen(mediaURL, canvasRef.current, asciiArtRef.current);
+		asciiGen(mediaURL, parentRef.current, canvasRef.current, asciiArtRef.current);
 
 		return () => {
 			window.removeEventListener("resize", calculateFontSize);
@@ -34,7 +35,7 @@ export default function AsciiArt() {
 	}, []);
 
 	return (
-		<Box maxW="100vw" maxH="fit-content" overflow="none">
+		<Box ref={parentRef} w="400px" maxH="fit-content" overflow="none">
 			<canvas ref={canvasRef} style={{ display: "none" }}></canvas>
 			<pre ref={asciiArtRef} style={{ fontSize: `${fontSize}px` }}></pre>
 		</Box>
