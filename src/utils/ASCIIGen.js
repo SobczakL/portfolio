@@ -1,72 +1,68 @@
-export function asciiGen(url, parentId, elementId, asciiArtElement) {
-	const parentSize = parentId.offsetWidth;
-	console.log(parentSize);
+export function asciiGen(url, canvasRef, targetRef, config) {
 	const density =
-		"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,^`'. ";
-	const ctx = elementId.getContext("2d");
+		"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!;:,^`'. ";
+	let maxWidth, maxHeight;
 
-	if (isImage(url)) {
-		handleImage(url);
+	if (!url) {
+		return Error("Invalid image source");
+	} else if (isImage(url)) {
+		handleImage(url, maxWidth, maxHeight);
 	} else if (isVideo(url)) {
-		handleVideo(url);
-	} else {
-		console.error("Unsupported media type");
+		/* handleVideo(url); */
 	}
 
 	function isImage(url) {
 		return url.match(/\.(jpeg|jpg|gif|png|webp)$/i);
 	}
-
 	function isVideo(url) {
 		return url.match(/\.(mp4|webm|ogg|mov)$/i);
 	}
 
-	function handleImage(imageUrl) {
-		const img = new Image();
-		img.src = imageUrl;
-		img.crossOrigin = "Anonymous";
-		img.onload = () => {
-			const aspectRatio = img.width / img.height;
-			const width = targetWidth;
-			const height = targetHeight;
+	if (config) {
+		maxHeight = config.height || 500;
+		maxWidth = config.width || 300;
+	} else {
+		maxHeight = 500;
+		maxWidth = 300;
+	}
+	const ctx = canvasRef.getContext("2d");
 
-			elementId.width = width;
-			elementId.height = height;
-			ctx.drawImage(img, 0, 0, width, height);
+    function handleImage(url, maxWidth, maxHeight) {
+        const image = new Image();
+		image.crossOrigin = "Anonymous";
+		image.src = url;
+		image.onload = () => {
+			const [width, height] = _sizeReducer(
+				image.width,
+				image.height,
+				maxWidth,
+				maxHeight,
+			);
+			canvasRef.width = width;
+			canvasRef.height = height;
+			ctx.clearRect(0, 0, canvasRef.width, canvasRef.height);
+			ctx.drawImage(image, 0, 0, width, height);
 			generateASCII();
 		};
 	}
-
-	async function handleVideo(videoUrl) {
-		const video = document.createElement("video");
-
-		video.src = videoUrl;
-		video.muted = true;
-		video.crossOrigin = "Anonymous";
-		video.currentTime = 0;
-		video.onerror = () => {
-			console.error(
-				"Failed to load video. Please check the URL and format.",
-			);
-		};
-		await video.play();
-
-		video.addEventListener("timeupdate", () => {
-			const aspectRatio = video.videoWidth / video.videoHeight;
-			const width = targetWidth;
-			const height = Math.round(width / aspectRatio);
-
-			elementId.width = parentSize;
-			elementId.height = height;
-			ctx.drawImage(video, 0, 0, width, height);
-			generateASCII();
-		});
+    /* Resize image to fit within maxWidth and maxHeight */
+	function _sizeReducer(width, height, maxWidth, maxHeight) {
+		if (width > maxWidth) {
+			height = Math.floor((height * maxWidth) / width);
+			width = maxWidth;
+		}
+		if (height > maxHeight) {
+			width = Math.floor((width * maxHeight) / height);
+			height = maxHeight;
+		}
+		return [width, height];
 	}
 
 	/* Generate ascii: calc avg brightness of pixel and map to density var to pixel position */
+
 	function generateASCII() {
-		const width = elementId.width;
-		const height = elementId.height;
+		const width = canvasRef.width;
+		const height = canvasRef.height;
 		const imageData = ctx.getImageData(0, 0, width, height);
 		let ascii = "";
 
@@ -85,6 +81,57 @@ export function asciiGen(url, parentId, elementId, asciiArtElement) {
 			ascii += "\n";
 		}
 
-		asciiArtElement.textContent = ascii;
+		targetRef.textContent = ascii;
 	}
 }
+
+/* async function handleVideo(videoUrl) { */
+/* 	const video = document.createElement("video"); */
+/* 	video.src = videoUrl; */
+/* 	video.muted = true; */
+/* 	video.crossOrigin = "Anonymous"; */
+/* 	video.currentTime = 0; */
+/**/
+/* 	video.onerror = () => { */
+/* 		console.error( */
+/* 			"Failed to load video. Please check the URL and format.", */
+/* 		); */
+/* 	}; */
+/**/
+/* 	// Wait until video metadata (like dimensions) is loaded */
+/* 	video.addEventListener("loadedmetadata", () => { */
+/* 		const width = video.videoWidth; */
+/* 		const height = video.videoHeight; */
+/**/
+/* 		if (width === 0 || height === 0) { */
+/* 			console.error("Video has zero width or height"); */
+/* 			return; */
+/* 		} */
+/**/
+/* 		canvasId.width = parentSize.width; */
+/* 		canvasId.height = parentSize.height; */
+/* 	}); */
+/**/
+/* 	// Play the video after metadata is loaded */
+/* 	await video.play(); */
+/**/
+/* 	// Update the canvas when the video plays */
+/* 	video.addEventListener("timeupdate", () => { */
+/* 		const width = video.videoWidth; */
+/* 		const height = video.videoHeight; */
+/**/
+/* 		if (width === 0 || height === 0) { */
+/* 			console.error("Video has zero width or height"); */
+/* 			return; */
+/* 		} */
+/**/
+/* 		const difW = parentSize.width / width; */
+/* 		const difH = parentSize.height / height; */
+/**/
+/* 		canvasId.width = parentSize.width; */
+/* 		canvasId.height = parentSize.height; */
+/**/
+/* 		ctx.drawImage(video, 0, 0, width / difW, height / difH); */
+/* 		generateASCII(); */
+/* 	}); */
+/* } */

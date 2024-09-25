@@ -1,43 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { asciiGen } from "../utils/ASCIIGen";
 import videoMedia from "../assets/images/test.mov";
+import testImg from "../assets/images/test.jpg";
 import { Box } from "@chakra-ui/react";
 
 export default function AsciiArt() {
-	const canvasRef = useRef(null);
-	const asciiArtRef = useRef(null);
-    const parentRef = useRef(null)
-	const [fontSize, setFontSize] = useState(14);
+    const canvasRef = useRef(null);
+    const targetRef = useRef(null);
+    const parentRef = useRef(null);
 
-	const calculateFontSize = () => {
-		const windowWidth = window.innerWidth;
-
-        if(windowWidth < 767){
-            setFontSize(4)
-        } else if(windowWidth >= 768 && windowWidth < 1280){
-            setFontSize(6)
-        } else {
-            setFontSize(8)
+    useEffect(() => {
+        if (canvasRef.current && targetRef.current && parentRef.current) {
+            const config = {
+                width: parentRef.current.offsetWidth,
+                height: parentRef.current.offsetHeight,
+            };
+            asciiGen(testImg, canvasRef.current, targetRef.current, config);
         }
-	};
+    }, [canvasRef, targetRef, parentRef]);
 
-	useEffect(() => {
-		calculateFontSize();
-
-		window.addEventListener("resize", calculateFontSize);
-
-		const mediaURL = videoMedia;
-		asciiGen(mediaURL, parentRef.current, canvasRef.current, asciiArtRef.current);
-
-		return () => {
-			window.removeEventListener("resize", calculateFontSize);
-		};
-	}, []);
-
-	return (
-		<Box ref={parentRef} w="400px" maxH="fit-content" overflow="none">
-			<canvas ref={canvasRef} style={{ display: "none" }}></canvas>
-			<pre ref={asciiArtRef} style={{ fontSize: `${fontSize}px` }}></pre>
-		</Box>
-	);
+    return (
+        <Box ref={parentRef} w="100vw" h="100vh" overflow="none">
+            <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
+            <pre ref={targetRef}></pre>
+        </Box>
+    );
 }
