@@ -61,8 +61,8 @@ export function asciiGen(url, canvasRef, targetRef, config) {
 	/* Generate ascii: calc avg brightness of pixel and map to density var to pixel position */
 
 	function generateASCII() {
-		const width = canvasRef.width;
-		const height = canvasRef.height;
+		const width = maxWidth
+		const height = maxHeight;
 		const imageData = ctx.getImageData(0, 0, width, height);
 		let ascii = "";
 

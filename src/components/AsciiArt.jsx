@@ -20,9 +20,9 @@ export default function AsciiArt() {
     }, [canvasRef, targetRef, parentRef]);
 
     return (
-        <Box ref={parentRef} w="100vw" h="100vh" overflow="none">
+        <Box ref={parentRef} maxW="500px" maxH="500px" overflow="none">
             <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
-            <pre ref={targetRef}></pre>
+            <pre ref={targetRef} style={{fontSize:"8px"}}></pre>
         </Box>
     );
 }
