@@ -1,10 +1,27 @@
+import { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
-import Tile from "../components/Tile";
+import TileList from "../components/TileList";
+import ParseJSON from "../utils/ParseJSON";
 
 export default function Home() {
+    const [data, setData] = useState(null);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const data = await ParseJSON("data.json");
+                setData(Object.keys(data));
+            }
+            catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+        fetchData();
+    }, []);
     return (
         <Box h="100vh">
-            <Tile />
+            <TileList
+                data={data}
+            />
         </Box>
     );
 }

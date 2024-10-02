@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 
-export default function Tile(title, description, link) {
+export default function Tile({title, description}) {
     return (
         <Box
             bg="mainBg"
