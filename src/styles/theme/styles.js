@@ -17,6 +17,7 @@ const styles = {
     },
     colors: {
         mainBg: "#232121",
+        hoverBg: "#2D2B2B",
     },
     breakpoints: {
         mobile: "300px",

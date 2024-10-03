@@ -1,19 +1,22 @@
 import { Box, Text } from "@chakra-ui/react";
 
-export default function Tile({title, description}) {
+export default function Tile({title, number}) {
     return (
         <Box
             bg="mainBg"
             h="100%"
+            minH="fit-content"
+            padding={["12px", "16px"]}
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
-            color="white"
-            fontFamily="honey"
             border="solid white 1px"
+            _hover={{
+                bg: "hoverBg",
+            }}
         >
-            <Text fontSize="mobile.subheader">{title}</Text>
-            <Text fontSize="mobile.subheader" align="right">{description}</Text>
+            <Text>{title}</Text>
+            <Text>{number}</Text>
         </Box>
     );
 }

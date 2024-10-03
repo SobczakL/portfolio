@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
-import TileList from "../components/TileList";
+import TileList from "../components/tileList/TileList";
 import ParseJSON from "../utils/ParseJSON";
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
         async function fetchData() {
             try {
                 const data = await ParseJSON("data.json");
-                setData(Object.keys(data));
+                setData(data);
             }
             catch (error) {
                 console.error("Error fetching data:", error);
