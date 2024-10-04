@@ -1,9 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
 
-export default function Tile({title, number}) {
+export default function Tile({ title, number, children }) {
     return (
         <Box
-            bg="mainBg"
+            /* bg="mainBg" */
             h="100%"
             minH="fit-content"
             padding={["12px", "16px"]}
@@ -16,6 +16,7 @@ export default function Tile({title, number}) {
             }}
         >
             <Text>{title}</Text>
+            {children}
             <Text>{number}</Text>
         </Box>
     );
