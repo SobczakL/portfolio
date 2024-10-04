@@ -1,17 +1,19 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, GridItem, Text } from "@chakra-ui/react";
 
 export default function Tile({ title, number, children }) {
     return (
-        <Box
+        <GridItem
             bg="mainBg"
             color="white"
-            h="100%"
-            minH="fit-content"
+            minH="100%"
+            rowSpan="1fr"
             padding={["12px", "16px"]}
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
             border="solid white 1px"
+            fontFamily="honey"
+            fontSize={["subheader.sm", "subheader.md", "subheader.lg"]}
             _hover={{
                 bg: "hoverBg",
             }}
@@ -19,6 +21,6 @@ export default function Tile({ title, number, children }) {
             <Text>{title}</Text>
             {children}
             <Text>{number}</Text>
-        </Box>
+        </GridItem>
     );
 }
