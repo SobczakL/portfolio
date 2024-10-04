@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import TileList from "../components/tileList/TileList";
+import AboutContent from "../components/content/AboutContent";
+import ProjectsContent from "../components/content/ProjectsContent";
+import ContactContent from "../components/content/ContactContent";
 import ParseJSON from "../utils/ParseJSON";
 
 export default function Home() {
+    const tileContent = {
+        About: <AboutContent />,
+        Projects: <ProjectsContent />,
+        Contact: <ContactContent />,
+    };
     const [viewData, setViewData] = useState(null);
     useEffect(() => {
         async function fetchData() {
             try {
                 const data = await ParseJSON("data.json");
                 setViewData(data);
-            }
-            catch (error) {
+            } catch (error) {
                 console.error("Error fetching data:", error);
             }
         }
@@ -24,9 +31,9 @@ export default function Home() {
     }, [viewData]);
     return (
         <Box h="100vh">
-            <TileList
-                data={viewData}
-            />
+            {viewData && (
+                <TileList viewData={viewData} tileContent={tileContent} />
+            )}
         </Box>
     );
 }

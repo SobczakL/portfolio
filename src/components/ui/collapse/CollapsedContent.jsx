@@ -7,7 +7,6 @@ export default function CollapsedContent({content}) {
             <Button onClick={onToggle}>Click Me</Button>
             <Collapse in={isOpen} animateOpacity>
                 <Box
-                    p="40px"
                     color="white"
                     mt="4"
                     bg="teal.500"

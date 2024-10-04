@@ -3,7 +3,8 @@ import { Box, Text } from "@chakra-ui/react";
 export default function Tile({ title, number, children }) {
     return (
         <Box
-            /* bg="mainBg" */
+            bg="mainBg"
+            color="white"
             h="100%"
             minH="fit-content"
             padding={["12px", "16px"]}
