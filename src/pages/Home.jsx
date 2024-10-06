@@ -7,21 +7,23 @@ import ContactContent from "../components/content/ContactContent";
 import ParseJSON from "../utils/ParseJSON";
 
 export default function Home() {
-    const tileContent = {
-        About: <AboutContent />,
-        Projects: <ProjectsContent />,
-        Contact: <ContactContent />,
+    const tileContentComponent = {
+        About: AboutContent,
+        Projects: ProjectsContent,
+        Contact: ContactContent,
     };
     const [viewData, setViewData] = useState(null);
     useEffect(() => {
         async function fetchData() {
             try {
                 const data = await ParseJSON("data.json");
-                Object.keys(tileContent).forEach((key) => {
+                Object.keys(tileContentComponent).forEach((key) => {
                     if (data[key]) {
-                        data[key].content = tileContent[key];
+                        data[key].contentComponent = tileContentComponent[key];
                     } else {
-                        data[key] = { content: tileContent[key] };
+                        data[key] = {
+                            contentComponent: tileContentComponent[key],
+                        };
                     }
                 });
                 setViewData(data);
@@ -36,11 +38,10 @@ export default function Home() {
             console.log("Fetched data:", viewData);
         }
     }, [viewData]);
+
     return (
         <Box h="100vh">
-            {viewData && (
-                <TileList viewData={viewData} tileContent={tileContent} />
-            )}
+            {viewData && <TileList viewData={viewData} />}
         </Box>
     );
 }

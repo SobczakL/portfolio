@@ -20,7 +20,7 @@ export default function Tile({ title, number, children }) {
         >
             <Text>{title}</Text>
             {children}
-            <Text>{number}</Text>
+            <Text align="end">{number}</Text>
         </GridItem>
     );
 }

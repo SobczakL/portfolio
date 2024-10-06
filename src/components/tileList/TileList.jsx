@@ -31,20 +31,23 @@ export default function TileList({ viewData }) {
         <Box h="100%">
             <Grid templateRows="repeat(3, 1fr)" h="100%">
                 {Object.keys(viewData).map((key, index) => {
-                    return (
+                    const ContentComponent = viewData[key].contentComponent;
+                    return ContentComponent ? (
                         <Box
                             key={index}
                             ref={(el) => (tileRefs.current[key] = el)}
                             onClick={() => handleTileClick(key)}
+                            cursor={"pointer"}
                         >
                             <Tile title={key} number={index}>
-                                <CollapsedContent
-                                    content={viewData[key].content}
-                                    isOpen={activeTile === key}
-                                />
+                                <CollapsedContent isOpen={activeTile === key}>
+                                    <ContentComponent
+                                        content={viewData[key].content}
+                                    />
+                                </CollapsedContent>
                             </Tile>
                         </Box>
-                    );
+                    ) : null;
                 })}
             </Grid>
         </Box>

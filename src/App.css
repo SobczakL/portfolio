@@ -1,1 +1,43 @@
 @import url("../src/assets/fonts/fonts.css");
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes smokeTrail {
+    0% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+}
+
+.cursor {
+    position: absolute;
+    border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+    background: radial-gradient(circle at center, teal 0%, pink 50%, none 100%);
+    opacity: 0.8;
+    width: 120px;
+    height: 80px;
+    animation: smokeTrail 4s ease-in-out infinite;
+    pointer-events: none;
+}
