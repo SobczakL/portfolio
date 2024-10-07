@@ -17,6 +17,8 @@ export default function ProjectItem({
             fontSize={["body.sm", "body.md", "body.lg"]}
             tabIndex={0}
             cursor="pointer"
+            boxSize="border-box"
+            h="100%"
         >
             <p>[]&gt;</p>
             <Box

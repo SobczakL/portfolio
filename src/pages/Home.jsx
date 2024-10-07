@@ -12,7 +12,9 @@ export default function Home() {
         Projects: ProjectsContent,
         Contact: ContactContent,
     };
+
     const [viewData, setViewData] = useState(null);
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -33,6 +35,7 @@ export default function Home() {
         }
         fetchData();
     }, []);
+
     useEffect(() => {
         if (viewData) {
             console.log("Fetched data:", viewData);
