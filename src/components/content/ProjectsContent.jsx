@@ -1,4 +1,4 @@
-import { VStack } from "@chakra-ui/react";
+import { Flex, VStack } from "@chakra-ui/react";
 import ProjectItem from "../projectItem/ProjectItem";
 import { useState } from "react";
 
@@ -6,9 +6,10 @@ export default function ProjectsContent({ content }) {
     const [activeProjectTile, setActiveProjectTile] = useState(null);
 
     return (
-        <VStack
-            overflow={["", "", "scroll"]}
-            maxH="100vh"
+        <Flex
+            overflowY="auto"
+            direction="column"
+            maxH="80vh"
         >
             {content.map((project, index) => (
                 <ProjectItem
@@ -19,6 +20,6 @@ export default function ProjectsContent({ content }) {
                     onMouseLeave={() => setActiveProjectTile(null)}
                 />
             ))}
-        </VStack>
+        </Flex>
     );
 }

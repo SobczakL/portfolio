@@ -1,14 +1,14 @@
-import { GridItem, Text } from "@chakra-ui/react";
+import { Box, GridItem, Text } from "@chakra-ui/react";
 
 export default function Tile({ title, number, children }) {
     return (
         <GridItem
             bg="mainBg"
             color="white"
-            minH="100%"
-            maxH="100%"
-            gap="10px"
             rowSpan="1fr"
+            minH="100%"
+            maxH="auto"
+            boxSizing="border-box"
             padding={["12px", "16px"]}
             display="flex"
             flexDirection="column"
@@ -22,7 +22,7 @@ export default function Tile({ title, number, children }) {
         >
             <Text>{title}</Text>
             {children}
-            <Text align="end">0{number+1}</Text>
+            <Text align="end">0{number + 1}</Text>
         </GridItem>
     );
 }
