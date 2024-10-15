@@ -1,7 +1,6 @@
 const styles = {
     fonts: {
-        latoR: "latoR",
-        latoSB: "latoSB",
+        honey: "honey",
     },
     fontSizes: {
         mobile: {
