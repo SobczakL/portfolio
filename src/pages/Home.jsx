@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
+import Header from "../components/header/Header"
 import TileList from "../components/tileList/TileList";
 import AboutContent from "../components/content/AboutContent";
 import ProjectsContent from "../components/content/ProjectsContent";
@@ -43,8 +44,8 @@ export default function Home() {
     }, [viewData]);
 
     return (
-        <Box h="100vh">
+        <>
             {viewData && <TileList viewData={viewData} />}
-        </Box>
+        </>
     );
 }

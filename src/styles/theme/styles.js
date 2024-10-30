@@ -3,7 +3,11 @@ const styles = {
         honey: "honey",
     },
     fontSizes: {
-        header: "31px",
+        header: {
+            sm: "31px",
+            md: "42px",
+            lg: "50px",
+        },
         subheader: {
             sm: "35px",
             md: "40px",

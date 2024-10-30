@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Flex, Grid } from "@chakra-ui/react";
 import Tile from "../tile/Tile";
 import CollapsedContent from "../ui/collapse/CollapsedContent";
 import { useState, useEffect, useRef } from "react";
@@ -9,6 +9,7 @@ export default function TileList({ viewData }) {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
 
     const handleTileClick = (key) => {
+        console.log(key)
         setActiveTile((prevKey) =>
             isDesktop
                 ? prevKey === key
@@ -47,45 +48,32 @@ export default function TileList({ viewData }) {
     }, []);
 
     return (
-        <Box h="100%">
-            <Grid
-                templateRows={[
-                    "repeat(3, 1fr)",
-                    "repeat(3, 1fr)",
-                    "repeat(2, 1fr)",
-                ]}
-                templateColumns={[
-                    "repeat(1, 1fr)",
-                    "repeat(1, 1fr)",
-                    "repeat(2, 1fr)",
-                ]}
-                h="100%"
-            >
+        <Box>
+            <Flex direction={isDesktop ? "row" : "column"} wrap="nowrap" h="full">
                 {Object.keys(viewData).map((key, index) => {
                     const ContentComponent = viewData[key].contentComponent;
+                    const isActive = activeTile === key
                     return ContentComponent ? (
                         <Box
                             key={index}
                             ref={(el) => (tileRefs.current[key] = el)}
                             onClick={() => handleTileClick(key)}
                             cursor="pointer"
-                            gridColumn={
-                                isDesktop && activeTile === key
-                                    ? "1 / 2"
-                                    : "auto"
-                            }
-                            gridRow={
-                                isDesktop && activeTile === key
-                                    ? "1 / 3"
-                                    : "auto"
+                            h="full"
+                            flex={
+                                isDesktop
+                                    ? isActive
+                                        ? "2 1 60%"
+                                        : "1 1 40%"
+                                    : "1 1 auto"
                             }
                         >
                             <Tile
                                 title={key}
                                 number={index}
-                                isActive={activeTile === key}
+                                isActive={isActive}
                             >
-                                <CollapsedContent isOpen={activeTile === key}>
+                                <CollapsedContent isOpen={isActive}>
                                     <ContentComponent
                                         content={viewData[key].content}
                                     />
@@ -94,7 +82,7 @@ export default function TileList({ viewData }) {
                         </Box>
                     ) : null;
                 })}
-            </Grid>
+            </Flex>
         </Box>
     );
 }
