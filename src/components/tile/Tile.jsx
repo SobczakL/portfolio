@@ -6,8 +6,6 @@ export default function Tile({ title, number, children }) {
             bg="mainBg"
             color="white"
             rowSpan="1fr"
-            minH="100%"
-            maxH="auto"
             boxSizing="border-box"
             padding={["12px", "16px"]}
             display="flex"
