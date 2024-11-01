@@ -16,9 +16,13 @@ export default function TileList({ viewData }) {
         return () => window.removeEventListener("resize", handleResize);
     }, [viewData]);
 
+
+
     return (
         <Box>
-            <Grid>
+            <Grid
+
+            >
                 {Object.entries(viewData).map(([key, { contentComponent: ContentComponent }], index) => (
                     <Box
                         key={index}
