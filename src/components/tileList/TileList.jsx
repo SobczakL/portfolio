@@ -5,22 +5,31 @@ import { useState, useEffect } from "react";
 
 export default function TileList({ viewData }) {
     const [activeTile, setActiveTile] = useState(Object.keys(viewData)[0]);
+    const [windowSize, setWindowSize] = useState(null)
 
     const handleTileClick = (key) => {
         setActiveTile(prevKey => (prevKey === key ? null : key));
     };
 
     useEffect(() => {
-        const handleResize = () => setActiveTile(window.innerWidth >= 768 ? Object.keys(viewData)[0] : null);
+        const handleResize = () => {
+            setActiveTile(window.innerWidth >= 1200 ? Object.keys(viewData)[0] : null);
+            setWindowSize(window.innerWidth)
+            console.log(window.innerWidth)
+        }
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
-    }, [viewData]);
+    }, []);
 
+
+    // --- TODO:
+    // Fix grid - currently not sizing correctly at all...
 
 
     return (
         <Box>
-            <Grid
+            {windowSize < 1200 ? (
+            <Flex
 
             >
                 {Object.entries(viewData).map(([key, { contentComponent: ContentComponent }], index) => (
@@ -36,7 +45,14 @@ export default function TileList({ viewData }) {
                         </Tile>
                     </Box>
                 ))}
-            </Grid>
+            </Flex>
+
+            ):
+            (
+            <p></p>
+
+            )
+            }
         </Box>
     );
 }
