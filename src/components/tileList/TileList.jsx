@@ -24,12 +24,13 @@ export default function TileList({ viewData }) {
 
     // --- TODO:
     // Fix grid - currently not sizing correctly at all...
+    //
 
 
     return (
         <Box>
             {windowSize < 1200 ? (
-            <Flex
+            <Grid
 
             >
                 {Object.entries(viewData).map(([key, { contentComponent: ContentComponent }], index) => (
@@ -45,7 +46,7 @@ export default function TileList({ viewData }) {
                         </Tile>
                     </Box>
                 ))}
-            </Flex>
+            </Grid>
 
             ):
             (
