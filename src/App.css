@@ -1,1 +1,5 @@
 @import url("../src/assets/fonts/fonts.css");
+.app{
+    height: 100dvh;
+    max-height: 100dvh;
+}

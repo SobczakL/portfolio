@@ -9,6 +9,7 @@ export default function Tile({ title, number, children }) {
             boxSizing="border-box"
             padding={["12px", "16px"]}
             display="flex"
+            h="100%"
             flexDirection="column"
             justifyContent="space-between"
             border="solid white 1px"

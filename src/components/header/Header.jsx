@@ -5,7 +5,6 @@ export default function Header() {
         <Box
             bg="mainBg"
             color="white"
-            maxH="auto"
             boxSizing="border-box"
             padding={["12px", "16px"]}
             border="solid white 1px"
