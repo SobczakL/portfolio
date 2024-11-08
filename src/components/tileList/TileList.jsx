@@ -44,6 +44,7 @@ export default function TileList({ viewData }) {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [activeTile, isDesktop]);
+    --- TODO: fix the below grid
 
     return (
         <Grid
