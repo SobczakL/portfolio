@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Header from "../components/header/Header";
 import TileList from "../components/tileList/TileList";
@@ -38,10 +38,10 @@ export default function Home() {
         }
     }, [viewData]);
 
-    return(
-        <Box h="100%">
+    return (
+        <Flex direction="column" h="100%">
             <Header />
             {viewData && <TileList viewData={viewData} />}
-        </Box>
+        </Flex>
     )
 }

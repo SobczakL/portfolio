@@ -44,11 +44,10 @@ export default function TileList({ viewData }) {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [activeTile, isDesktop]);
-    --- TODO: fix the below grid
 
     return (
         <Grid
-            justifyItems="stretch"
+            flex="1"
             templateRows={isDesktop ? "repeat(2, minmax(1fr))" : "repeat(3, minmax(1fr))"}
             templateColumns={isDesktop ? "repeat(2, 1fr)" : "repeat(1, 1fr)"}
         >
