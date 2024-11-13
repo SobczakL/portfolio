@@ -48,7 +48,7 @@ export default function TileList({ viewData }) {
     return (
         <Grid
             flex="1"
-            templateRows={isDesktop ? "repeat(2, minmax(1fr))" : "repeat(3, minmax(1fr))"}
+            templateRows={isDesktop ? "repeat(2, 1fr)" : "repeat(3, 1fr)"}
             templateColumns={isDesktop ? "repeat(2, 1fr)" : "repeat(1, 1fr)"}
         >
             {Object.keys(viewData).map((key, index) => {
