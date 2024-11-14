@@ -14,7 +14,7 @@
                 "title": "ASCII Art Generator",
                 "description": "This tool generates ASCII art from input images, allowing users to create text-based representations of their favorite visuals. It offers a simple interface for uploading images and receiving their ASCII versions.",
                 "year": "2024",
-                "link": "https://github.com/SobczakL/ASCII-gen.git",
+                "link": "https://sobczakl.github.io/ASCII-gen/",
                 "stack": "HTML, CSS, JavaScript"
             },
             {
@@ -30,7 +30,7 @@
                 "title": "Retail Calculator",
                 "description": "This C program serves as a comprehensive tool for retail businesses, helping users perform essential calculations related to sales and inventory metrics. Its user-friendly menu interface simplifies the process, making it accessible for retailers of all sizes.",
                 "year": "2024",
-                "link": "https://github.com/SobczakL/retail-calculator",
+                "link": "https://sobczakl.github.io/retail-calculator/",
                 "stack": "C"
             },
             {

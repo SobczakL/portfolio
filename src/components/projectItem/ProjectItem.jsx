@@ -1,4 +1,5 @@
 import { Box, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
+import ProjectItemLinkWindow from "../projectItemLinkWindow/ProjectItemLinkWindow";
 export default function ProjectItem({
     project,
     isActive,
@@ -74,6 +75,7 @@ export default function ProjectItem({
                     </LinkOverlay>
                 </Box>
             </LinkBox>
+            <ProjectItemLinkWindow link={project.link}/>
         </Box>
     );
 }
