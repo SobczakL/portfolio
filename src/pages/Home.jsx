@@ -39,7 +39,7 @@ export default function Home() {
     }, [viewData]);
 
     return (
-        <Flex direction="column" h="100%">
+        <Flex position="relative" direction="column" h="100%">
             <Header />
             {viewData && <TileList viewData={viewData} />}
         </Flex>
