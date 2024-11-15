@@ -75,7 +75,7 @@ export default function ProjectItem({
                     </LinkOverlay>
                 </Box>
             </LinkBox>
-            <ProjectItemLinkWindow link={project.link}/>
+            <ProjectItemLinkWindow isActive={isActive} link={project.link}/>
         </Box>
     );
 }
