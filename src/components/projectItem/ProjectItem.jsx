@@ -3,9 +3,6 @@ import ProjectItemLinkWindow from "../projectItemLinkWindow/ProjectItemLinkWindo
 import { useState } from "react";
 export default function ProjectItem({
     project,
-    isActive,
-    onMouseEnter,
-    onMouseLeave,
 }) {
 
     const [showDescription, setShowDescription] = useState(false)
@@ -13,12 +10,8 @@ export default function ProjectItem({
     const handleReadMore = () => {
         setShowDescription(!showDescription)
     }
-
-
     return (
         <Box
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
             display="flex"
             gap={["10px"]}
             minW="100%"
@@ -54,20 +47,23 @@ export default function ProjectItem({
                                 "projectTitle.md",
                                 "projectTitle.lg",
                             ]}
-                            bg={isActive ? "accentTeal" : "none"}
-                            color={isActive ? "black" : "none"}
+                            // bg={isActive ? "accentTeal" : "none"}
+                            // color={isActive ? "black" : "none"}
                             w="fit-content"
                         >
                             {project.title}
                         </Text>
                         <Flex alignItems="center" gap="10px">
                             <Text>{project.year}</Text>
-                            <Box w="10px" h="10px" backgroundColor={isActive ? "white" : "accentTeal"}
+                            <Box w="10px" h="10px"
+                                // backgroundColor={isActive ? "white" : "accentTeal"}
                             ></Box>
                             &#9166;
                         </Flex>
                     </Box>
-                    <Flex direction="column" gap="8px" display={isActive ? "block" : "none"}>
+                    <Flex direction="column" gap="8px"
+                        // display={isActive ? "block" : "none"}
+                    >
                         <Text>{project.description}</Text>
                         <Text>TECH: {project.stack}</Text>
                     </Flex>
@@ -87,7 +83,9 @@ export default function ProjectItem({
                     </a>
                 </Text>
             </Box>
-            <ProjectItemLinkWindow isActive={isActive} link={project.link} />
+            <ProjectItemLinkWindow
+                // isActive={isActive}
+                link={project.link} />
         </Box>
     );
 }

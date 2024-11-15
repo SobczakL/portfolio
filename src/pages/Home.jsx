@@ -32,12 +32,6 @@ export default function Home() {
         setViewData(data);
     }, []);
 
-    useEffect(() => {
-        if (viewData) {
-            console.log("Fetched data:", viewData);
-        }
-    }, [viewData]);
-
     return (
         <Flex position="relative" direction="column" h="100%">
             <Header />
