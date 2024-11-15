@@ -7,9 +7,7 @@ export default function ProjectsContent({ content }) {
 
     return (
         <Flex
-            overflowY="auto"
             direction="column"
-            maxH="80vh"
         >
             {content.map((project, index) => (
                 <ProjectItem

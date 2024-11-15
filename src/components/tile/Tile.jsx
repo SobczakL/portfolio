@@ -1,6 +1,6 @@
 import { Box, GridItem, Text } from "@chakra-ui/react";
 
-export default function Tile({ title, number, children }) {
+export default function Tile({ title, number, children, isActive }) {
     return (
         <GridItem
             bg="mainBg"
@@ -10,6 +10,7 @@ export default function Tile({ title, number, children }) {
             padding={["12px", "16px"]}
             display="flex"
             h="100%"
+            maxH="100%"
             flexDirection="column"
             justifyContent="space-between"
             border="solid white 1px"
