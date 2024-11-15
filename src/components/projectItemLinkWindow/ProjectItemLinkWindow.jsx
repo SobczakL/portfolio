@@ -28,7 +28,8 @@ export default function ProjectItemLinkWindow({ isActive, link }) {
                 style={{
                     overflow: "hidden",
                     width: "500px",
-                    height: "300px"
+                    height: "300px",
+                    opacity: "90%"
 
                 }}>
             </iframe>
