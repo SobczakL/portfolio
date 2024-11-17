@@ -2,9 +2,9 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import ProjectItemLinkWindow from "../projectItemLinkWindow/ProjectItemLinkWindow";
 import { useState } from "react";
 export default function ProjectItem({
+    key,
     project,
 }) {
-
     const [showDescription, setShowDescription] = useState(false)
 
     const handleReadMore = () => {
@@ -12,6 +12,7 @@ export default function ProjectItem({
     }
     return (
         <Box
+            key={key}
             display="flex"
             gap={["10px"]}
             minW="100%"

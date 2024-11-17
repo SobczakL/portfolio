@@ -1,8 +1,9 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import Header from "../components/header/Header";
 import portfolioData from "../data/data.json";
 import AboutSection from "../components/sections/aboutSection/AboutSection"
 import ProjectSection from "../components/sections/projectSection/ProjectSection"
+import ContactSection from "../components/sections/contactSection/ContactSection";
 
 export default function Home() {
     return (
@@ -15,8 +16,7 @@ export default function Home() {
                 boxSizing="border-box"
                 padding={["12px", "16px"]}
                 display="flex"
-                h="100%"
-                maxH="100%"
+                h="auto"
                 flexDirection="column"
                 border="solid white 1px"
                 fontFamily="honey"
@@ -27,6 +27,7 @@ export default function Home() {
             >
                 <AboutSection />
                 <ProjectSection projectData={portfolioData.Projects}/>
+                <ContactSection />
             </Flex>
         </Flex>
     )
