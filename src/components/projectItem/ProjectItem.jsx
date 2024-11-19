@@ -4,6 +4,7 @@ import { useState } from "react";
 export default function ProjectItem({
     key,
     project,
+    isActive
 }) {
     const [showDescription, setShowDescription] = useState(false)
 
@@ -48,8 +49,8 @@ export default function ProjectItem({
                                 "projectTitle.md",
                                 "projectTitle.lg",
                             ]}
-                            // bg={isActive ? "accentTeal" : "none"}
-                            // color={isActive ? "black" : "none"}
+                            bg={isActive ? "accentTeal" : "none"}
+                            color={isActive ? "black" : "none"}
                             w="fit-content"
                         >
                             {project.title}
@@ -57,13 +58,13 @@ export default function ProjectItem({
                         <Flex alignItems="center" gap="10px">
                             <Text>{project.year}</Text>
                             <Box w="10px" h="10px"
-                                // backgroundColor={isActive ? "white" : "accentTeal"}
+                            backgroundColor={isActive ? "white" : "accentTeal"}
                             ></Box>
                             &#9166;
                         </Flex>
                     </Box>
                     <Flex direction="column" gap="8px"
-                        // display={isActive ? "block" : "none"}
+                    display={isActive ? "block" : "none"}
                     >
                         <Text>{project.description}</Text>
                         <Text>TECH: {project.stack}</Text>
@@ -80,12 +81,12 @@ export default function ProjectItem({
                     _hover={{ textDecoration: "underline" }}
                 >
                     <a href={project.link}>
-                    LINK -&gt;
+                        LINK -&gt;
                     </a>
                 </Text>
             </Box>
             <ProjectItemLinkWindow
-                // isActive={isActive}
+                isActive={isActive}
                 link={project.link} />
         </Box>
     );
