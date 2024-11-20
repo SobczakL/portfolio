@@ -21,6 +21,7 @@ export default function ProjectList({ projectContent }) {
     }
 
     useEffect(() => {
+        console.log(activeProject)
         document.addEventListener("mousedown", handleClickOutside)
 
         return () => {
@@ -41,7 +42,10 @@ export default function ProjectList({ projectContent }) {
                                 key={index}
                                 ref={(el) => (projectRef.current[index] = el)}
                                 project={project}
+                                onClick={() => handleProjectClick(index)}
                                 isActive={activeProject === index}
+                                onMouseEnter={() => setActiveProject(index)}
+                                onMouseLeave={() => setActiveProject(null)}
                             >
                             </ProjectItem>
                         </>

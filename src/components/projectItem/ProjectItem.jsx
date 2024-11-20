@@ -4,7 +4,10 @@ import { useState } from "react";
 export default function ProjectItem({
     key,
     project,
-    isActive
+    onClick,
+    isActive,
+    onMouseEnter,
+    onMouseLeave
 }) {
     const [showDescription, setShowDescription] = useState(false)
 
@@ -14,6 +17,9 @@ export default function ProjectItem({
     return (
         <Box
             key={key}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
             display="flex"
             gap={["10px"]}
             minW="100%"
@@ -58,13 +64,13 @@ export default function ProjectItem({
                         <Flex alignItems="center" gap="10px">
                             <Text>{project.year}</Text>
                             <Box w="10px" h="10px"
-                            backgroundColor={isActive ? "white" : "accentTeal"}
+                                backgroundColor={isActive ? "white" : "accentTeal"}
                             ></Box>
                             &#9166;
                         </Flex>
                     </Box>
                     <Flex direction="column" gap="8px"
-                    display={isActive ? "block" : "none"}
+                        display={isActive ? "block" : "none"}
                     >
                         <Text>{project.description}</Text>
                         <Text>TECH: {project.stack}</Text>
