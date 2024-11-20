@@ -1,6 +1,5 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import ProjectItemLinkWindow from "../projectItemLinkWindow/ProjectItemLinkWindow";
-import { useState } from "react";
 export default function ProjectItem({
     key,
     project,
@@ -9,11 +8,7 @@ export default function ProjectItem({
     onMouseEnter,
     onMouseLeave
 }) {
-    const [showDescription, setShowDescription] = useState(false)
 
-    const handleReadMore = () => {
-        setShowDescription(!showDescription)
-    }
     return (
         <Box
             key={key}
