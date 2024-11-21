@@ -1,9 +1,9 @@
-import AsciiArt from "../components/AsciiArt";
+import AsciiArt from "../components/AsciiArt"
 
-export default function Start() {
-	return (
-		<div>
-			<AsciiArt />
-		</div>
-	);
+export default function Start(){
+    return(
+        <>
+            <AsciiArt/>
+        </>
+    )
 }

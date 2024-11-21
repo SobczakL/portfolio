@@ -1,28 +1,28 @@
-import { useEffect, useRef, useState } from "react";
-import { asciiGen } from "../utils/ASCIIGen";
-import videoMedia from "../assets/images/test.mov";
+import { useEffect, useRef } from "react";
 import testImg from "../assets/images/test.jpg";
 import { Box } from "@chakra-ui/react";
+import { ASCIIGen } from "../utils/ASCIIGen";
 
 export default function AsciiArt() {
-    const canvasRef = useRef(null);
-    const targetRef = useRef(null);
-    const parentRef = useRef(null);
+    const asciiRef = useRef();
 
     useEffect(() => {
-        if (canvasRef.current && targetRef.current && parentRef.current) {
-            const config = {
-                width: parentRef.current.offsetWidth,
-                height: parentRef.current.offsetHeight,
-            };
-            asciiGen(testImg, canvasRef.current, targetRef.current, config);
-        }
-    }, [canvasRef, targetRef, parentRef]);
+        ASCIIGen(testImg, asciiRef.current);
+    }, []);
 
     return (
-        <Box ref={parentRef} maxW="500px" maxH="500px" overflow="none">
-            <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
-            <pre ref={targetRef} style={{fontSize:"8px"}}></pre>
+        <Box h="100%">
+            <pre
+                ref={asciiRef}
+                style={{
+                    fontFamily: "monospace",
+                    whiteSpace: "pre",
+                    overflow: "auto",
+                    minHeight: "600px",
+                    maxHeight: "900px",
+                    width: "900px",
+                }}
+            ></pre>
         </Box>
     );
 }
