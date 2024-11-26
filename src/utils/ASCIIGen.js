@@ -1,11 +1,11 @@
 export function ASCIIGen(url, asciiref) {
     const density =
         "$@b%8&wm#*oahkbdpqwmzo0qlcjuyxzcvunxrjft/\\|()1{}[]?-_+~<>i!;:,^`'. ";
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
+    const ctx = asciiref.getContext("2d");
 
-    let maxwidth = 100;
-    let maxheight = 100;
+    let preElement = asciiref
+    let preWidth = preElement.offSetWidth
+    let preHeight = preElement.offSetHeight
 
     if (/\.(jpeg|jpg|gif|png|webp)$/i.test(url)) {
         handleimage(url);
@@ -20,26 +20,32 @@ export function ASCIIGen(url, asciiref) {
         image.crossOrigin = "anonymous";
         image.src = url;
         image.onload = () => {
-            const aspectratio = image.width / image.height;
+            const aspectRatio = image.width / image.height;
 
-            maxwidth = 100;
-            maxheight = Math.round(maxwidth / aspectratio);
+            let maxwidth = preWidth
+            let maxheight = Math.round(maxwidth / aspectRatio);
+
+            if (maxheight > preHeight) {
+                maxheight = preHeight;
+                maxwidth = Math.round(maxheight * aspectRatio);
+            }
 
             const charHeightRatio = 2;
             maxheight = Math.round(maxheight / charHeightRatio);
 
-            canvas.width = maxwidth;
-            canvas.height = maxheight;
+            asciiref.width = maxwidth;
+            asciiref.height = maxheight;
 
             ctx.drawImage(image, 0, 0, maxwidth, maxheight);
+            console.log({ "width": asciiref.width, "height": asciiref.height })
 
             generateASCII();
         };
     }
 
     function generateASCII() {
-        const width = maxwidth;
-        const height = maxheight;
+        const width = asciiref.width;
+        const height = asciiref.height;
         const imagedata = ctx.getImageData(0, 0, width, height);
         let ascii = "";
 
@@ -89,7 +95,7 @@ export function ASCIIGen(url, asciiref) {
     /* 	// Play the video after metadata is loaded */
     /* 	await video.play(); */
     /**/
-    /* 	// Update the canvas when the video plays */
+    /* 	// Update the asciiref when the video plays */
     /* 	video.addEventListener("timeupdate", () => { */
     /* 		const width = video.videoWidth; */
     /* 		const height = video.videoHeight; */

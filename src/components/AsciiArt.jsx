@@ -11,16 +11,16 @@ export default function AsciiArt() {
     }, []);
 
     return (
-        <Box h="100%">
+        <Box h="100%" color="white" opacity="95%">
             <pre
                 ref={asciiRef}
                 style={{
                     fontFamily: "monospace",
                     whiteSpace: "pre",
                     overflow: "auto",
-                    minHeight: "600px",
-                    maxHeight: "900px",
-                    width: "900px",
+                    minHeight: "400px",
+                    maxHeight: "600px",
+                    width: "250px",
                 }}
             ></pre>
         </Box>
