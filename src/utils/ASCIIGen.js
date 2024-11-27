@@ -18,7 +18,9 @@ export function ASCIIGen(url, parent, canvas, asciiOutput) {
         image.onload = () => {
             const aspectRatio = image.width / image.height;
 
-            // I have no idea why the ratio here is to be divided by 8 but it works.
+            /* I have no idea why the width here is to be divided by 8 but
+            its a good ratio of target width to font height. */
+
             let maxwidth = parent.offsetWidth / 8;
             let maxheight = Math.round(maxwidth / aspectRatio);
 
