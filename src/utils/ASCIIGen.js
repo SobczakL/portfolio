@@ -1,11 +1,7 @@
-export function ASCIIGen(url, asciiref) {
+export function ASCIIGen(url, parent, canvas, asciiOutput) {
     const density =
-        "$@b%8&wm#*oahkbdpqwmzo0qlcjuyxzcvunxrjft/\\|()1{}[]?-_+~<>i!;:,^`'. ";
-    const ctx = asciiref.getContext("2d");
-
-    let preElement = asciiref
-    let preWidth = preElement.offSetWidth
-    let preHeight = preElement.offSetHeight
+        "$@b%8&wm#*oahkbdpqwmzo0qlcjuyxzcvunxrjft/\|()1{}[]?-_+~<>i!;:,^`'. ";
+    const ctx = canvas.getContext("2d");
 
     if (/\.(jpeg|jpg|gif|png|webp)$/i.test(url)) {
         handleimage(url);
@@ -22,31 +18,25 @@ export function ASCIIGen(url, asciiref) {
         image.onload = () => {
             const aspectRatio = image.width / image.height;
 
-            let maxwidth = preWidth
+            // I have no idea why the ratio here is to be divided by 8 but it works.
+            let maxwidth = parent.offsetWidth / 8;
             let maxheight = Math.round(maxwidth / aspectRatio);
-
-            if (maxheight > preHeight) {
-                maxheight = preHeight;
-                maxwidth = Math.round(maxheight * aspectRatio);
-            }
 
             const charHeightRatio = 2;
             maxheight = Math.round(maxheight / charHeightRatio);
 
-            asciiref.width = maxwidth;
-            asciiref.height = maxheight;
+            canvas.width = maxwidth;
+            canvas.height = maxheight;
 
             ctx.drawImage(image, 0, 0, maxwidth, maxheight);
-            console.log({ "width": asciiref.width, "height": asciiref.height })
-
             generateASCII();
         };
     }
-
     function generateASCII() {
-        const width = asciiref.width;
-        const height = asciiref.height;
+        const width = canvas.width;
+        const height = canvas.height;
         const imagedata = ctx.getImageData(0, 0, width, height);
+        console.log(imagedata)
         let ascii = "";
 
         for (let y = 0; y < height; y++) {
@@ -62,7 +52,7 @@ export function ASCIIGen(url, asciiref) {
             ascii += "\n";
         }
 
-        if (asciiref) asciiref.textContent = ascii;
+        asciiOutput.textContent = ascii;
     }
 
     /* async function handleVideo(videoUrl) { */
@@ -95,7 +85,7 @@ export function ASCIIGen(url, asciiref) {
     /* 	// Play the video after metadata is loaded */
     /* 	await video.play(); */
     /**/
-    /* 	// Update the asciiref when the video plays */
+    /* 	// Update the canvas when the video plays */
     /* 	video.addEventListener("timeupdate", () => { */
     /* 		const width = video.videoWidth; */
     /* 		const height = video.videoHeight; */
