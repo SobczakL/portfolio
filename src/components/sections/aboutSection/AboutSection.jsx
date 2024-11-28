@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Box, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
 
-export default function AboutContent() {
+export default function AboutSection() {
     const targetText = {
         0: "/ FULL STACK DEVELOPER",
         1: "/ TORONTO, CANADA",

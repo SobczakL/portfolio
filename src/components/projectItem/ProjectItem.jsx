@@ -1,22 +1,18 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import ProjectItemLinkWindow from "../projectItemLinkWindow/ProjectItemLinkWindow";
-import { useState } from "react";
 export default function ProjectItem({
+    key,
     project,
+    onClick,
     isActive,
     onMouseEnter,
-    onMouseLeave,
+    onMouseLeave
 }) {
-
-    const [showDescription, setShowDescription] = useState(false)
-
-    const handleReadMore = () => {
-        setShowDescription(!showDescription)
-    }
-
 
     return (
         <Box
+            key={key}
+            onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             display="flex"
@@ -62,12 +58,15 @@ export default function ProjectItem({
                         </Text>
                         <Flex alignItems="center" gap="10px">
                             <Text>{project.year}</Text>
-                            <Box w="10px" h="10px" backgroundColor={isActive ? "white" : "accentTeal"}
+                            <Box w="10px" h="10px"
+                                backgroundColor={isActive ? "white" : "accentTeal"}
                             ></Box>
                             &#9166;
                         </Flex>
                     </Box>
-                    <Flex direction="column" gap="8px" display={isActive ? "block" : "none"}>
+                    <Flex direction="column" gap="8px"
+                        display={isActive ? "block" : "none"}
+                    >
                         <Text>{project.description}</Text>
                         <Text>TECH: {project.stack}</Text>
                     </Flex>
@@ -83,11 +82,13 @@ export default function ProjectItem({
                     _hover={{ textDecoration: "underline" }}
                 >
                     <a href={project.link}>
-                    LINK -&gt;
+                        LINK -&gt;
                     </a>
                 </Text>
             </Box>
-            <ProjectItemLinkWindow isActive={isActive} link={project.link} />
+            <ProjectItemLinkWindow
+                isActive={isActive}
+                link={project.link} />
         </Box>
     );
 }

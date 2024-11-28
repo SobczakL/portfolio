@@ -30,7 +30,6 @@ export default function ProjectItemLinkWindow({ isActive, link }) {
                     width: "500px",
                     height: "300px",
                     opacity: "90%"
-
                 }}>
             </iframe>
 
